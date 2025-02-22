@@ -29,6 +29,11 @@ const patientSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     }, // Provider who is assigned
+
+    // New fields
+    steps: { type: Number, default: 0 }, // Daily steps count
+    activityTime: { type: String, default: "0 hours" }, // Activity time in hours
+    sleep: { type: String, default: "0 hours" }, // Sleep duration
   },
   { timestamps: true }
 );
