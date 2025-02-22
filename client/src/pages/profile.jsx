@@ -1,5 +1,5 @@
 import React from "react";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TextField, Button, Grid, Typography,Container } from '@mui/material';
 
 const Profile = () => {
