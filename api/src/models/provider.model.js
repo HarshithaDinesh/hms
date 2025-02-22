@@ -7,9 +7,21 @@ const providerSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    organisation: { type: String, required: true, trim: true },
-    specialization: { type: String, required: true },
-    patients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Patient" }], // Array of patient IDs
+    organisation: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    specialization: {
+      type: String,
+      required: true,
+    },
+    patients: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Patient",
+      },
+    ],
   },
   { timestamps: true }
 );
