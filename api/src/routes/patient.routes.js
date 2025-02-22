@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const patientController = require("../controllers/patient.controller");
 
-router.post("/patient", patientController.createPatient);
-router.get("/patient/:id", patientController.getPatientById);
-router.put("/patient/:id/health", patientController.updateHealthData);
-router.delete("/patient/:id", patientController.deletePatient);
+router.post("/", patientController.createPatient);
+router.get("/:id", patientController.getPatientById);
+router.put("/:id/health", patientController.updateHealthData);
+router.delete("/:id", patientController.deletePatient);
 
 module.exports = router;
