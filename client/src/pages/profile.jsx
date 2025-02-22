@@ -26,7 +26,7 @@ const Profile = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Typography textAlign={'center'} variant="h5" gutterBottom >
         Patient Profile Page
       </Typography>

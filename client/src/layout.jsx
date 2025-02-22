@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
+  Button,
   Toolbar,
   IconButton,
   Drawer,
@@ -10,6 +11,7 @@ import {
   ListItemText,
   Typography,
   ListItemButton,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PatientDashboard from "./pages/patientDashboard";
@@ -21,20 +23,45 @@ import Registration from "./components/registration";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <Router>
+    <>
       {/* Header */}
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">My App</Typography>
+          <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{
+              textDecoration: "none",
+              cursor: "pointer",
+              color: "inherit",
+            }}
+          >
+            Healthcare Wellness
+          </Typography>
+
+          {/* Push buttons to the right */}
+          <Box sx={{ marginLeft: "auto" }}>
+            <Button color="inherit" onClick={() => navigate("/healthtips")}>
+              Health Tips
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/register")}>
+              Register
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 
