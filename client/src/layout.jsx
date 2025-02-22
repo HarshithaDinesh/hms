@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -27,6 +27,11 @@ export default function Layout() {
 
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleLogout = () => {
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    navigate("/login");
   };
 
   return (
@@ -69,50 +74,37 @@ export default function Layout() {
       <Drawer anchor="left" open={open} onClose={toggleDrawer}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/patient"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/patient" onClick={toggleDrawer}>
               <ListItemText primary="My Dashboard" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/profile"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/profile" onClick={toggleDrawer}>
               <ListItemText primary="My Profile" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/healthcare"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/healthcare" onClick={toggleDrawer}>
               <ListItemText primary="Healthcare Dashboard" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/login" onClick={toggleDrawer}>
+            <ListItemButton onClick={handleLogout}>
               <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
         </List>
       </Drawer>
 
-      {/* Routes */}
-      <Routes>
-      <Route path="/" element={<Home />} />
+      {/* Routes (DO NOT WRAP IN ANOTHER <Router>) */}
+      {/* <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Login />} />
         <Route path="/patient" element={<PatientDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/healthcare" element={<Healthcare />} />
         <Route path="/register" element={<Registration />} />
-      </Routes>
-    </Router>
+      </Routes> */}
+    </>
   );
 }
