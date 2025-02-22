@@ -14,6 +14,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import PatientDashboard from "./pages/patientDashboard";
 import Login from "./pages/login";
+import Registration from "./pages/Registration";
 import Healthcare from "./pages/healthcare";
 import Profile from "./pages/profile";
 
@@ -71,11 +72,17 @@ export default function Layout() {
               <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/Registration" onClick={toggleDrawer}>
+              <ListItemText primary="Registration" />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
 
       {/* Routes */}
       <Routes>
+        <Route path="/Registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Login />} />
         <Route path="/patient" element={<PatientDashboard />} />
