@@ -1,45 +1,25 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const cors = require("cors");
-require("dotenv").config();
 const connectDB = require("./config/db");
 
-const app = express();
+// Load environment variables
+dotenv.config();
+
+// Connect to MongoDB
 connectDB();
-app.use(cors());
-app.use(express.json());
 
-app.get("/", (req, res) => res.send("API is running..."));
-
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
-});
-// from here parvaiz
-
-
-const cors = require("cors")
-const express = require("express");
 const app = express();
-const port = 8080
-const { MongoClient } = require("mongodb")
-const UserRoute=require("./Routes/userRoutes")
 
-const dbconnection=require('./DbConnection')
-dbconnection()
-app.use(express.json())
-app.use(cors())
+// Middleware
+app.use(express.json()); // Parse JSON request bodies
+app.use(cors()); // Enable CORS for API access
 
-const fs=require("fs")
+// Import Routes
+const userRoutes = require("./routes/user.routes");
+app.use("/api/users", userRoutes);
 
-app.use(express.static('public'))
-app.use("/userApi", UserRoute)
-
-
-app.use("*", (req, res) => {    // if no API are made 
-        res.send(" Itwalkin could not fetch this API")    
-})
-
-
-
-app.listen(port, () => {
-    console.log(`app running on port ${port} for booking`)
-})
+// Server listening
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// >>>>>>> 3695d59076a464ce37a70ce04c7eb0c53acb4370
