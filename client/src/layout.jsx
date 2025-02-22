@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Routes, Route } from "react-router-dom";
 import {
   AppBar,
   Button,
@@ -14,6 +14,12 @@ import {
   Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import PatientDashboard from "./pages/patientDashboard";
+import Login from "./pages/login";
+import Home from "./pages/Home.jsx";
+import Healthcare from "./pages/healthcare";
+import Profile from "./pages/profile";
+import Registration from "./components/registration";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
@@ -21,6 +27,11 @@ export default function Layout() {
 
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleLogout = () => {
+    document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    navigate("/login");
   };
 
   return (
@@ -63,39 +74,37 @@ export default function Layout() {
       <Drawer anchor="left" open={open} onClose={toggleDrawer}>
         <List>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/patient"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/patient" onClick={toggleDrawer}>
               <ListItemText primary="My Dashboard" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/profile"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/profile" onClick={toggleDrawer}>
               <ListItemText primary="My Profile" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton
-              component={Link}
-              to="/healthcare"
-              onClick={toggleDrawer}
-            >
+            <ListItemButton component={Link} to="/healthcare" onClick={toggleDrawer}>
               <ListItemText primary="Healthcare Dashboard" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/login" onClick={toggleDrawer}>
+            <ListItemButton onClick={handleLogout}>
               <ListItemText primary="Logout" />
             </ListItemButton>
           </ListItem>
         </List>
       </Drawer>
+
+      {/* Routes (DO NOT WRAP IN ANOTHER <Router>) */}
+      {/* <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/patient" element={<PatientDashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/healthcare" element={<Healthcare />} />
+        <Route path="/register" element={<Registration />} />
+      </Routes> */}
     </>
   );
 }
