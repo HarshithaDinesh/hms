@@ -11,12 +11,13 @@ import {
   ListItemText,
   Typography,
   ListItemButton,
+  Box,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ Now useNavigate() works correctly
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -42,15 +43,19 @@ export default function Layout() {
           >
             Healthcare Wellness
           </Typography>
-          <Button color="inherit" onClick={() => navigate("/healthtips")}>
-            Health Tips
-          </Button>
-          <Button color="inherit" onClick={() => navigate("/login")}>
-            Login
-          </Button>
-          <Button color="inherit" onClick={() => navigate("/register")}>
-            Register
-          </Button>
+
+          {/* Push buttons to the right */}
+          <Box sx={{ marginLeft: "auto" }}>
+            <Button color="inherit" onClick={() => navigate("/healthtips")}>
+              Health Tips
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/register")}>
+              Register
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 
