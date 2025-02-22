@@ -14,6 +14,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import PatientDashboard from "./pages/patientDashboard";
 import Login from "./pages/login";
+import Home from "./pages/Home.jsx";
 import Healthcare from "./pages/healthcare";
 import Profile from "./pages/profile";
 
@@ -76,6 +77,7 @@ export default function Layout() {
 
       {/* Routes */}
       <Routes>
+      <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Login />} />
         <Route path="/patient" element={<PatientDashboard />} />
