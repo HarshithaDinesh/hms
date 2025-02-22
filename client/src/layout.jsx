@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
+  Button,
   Toolbar,
   IconButton,
   Drawer,
@@ -12,28 +13,44 @@ import {
   ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import PatientDashboard from "./pages/patientDashboard";
-import Login from "./pages/login";
-import Home from "./pages/Home.jsx";
-import Healthcare from "./pages/healthcare";
-import Profile from "./pages/profile";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate(); // ✅ Now useNavigate() works correctly
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   return (
-    <Router>
+    <>
       {/* Header */}
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6">My App</Typography>
+          <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{
+              textDecoration: "none",
+              cursor: "pointer",
+              color: "inherit",
+            }}
+          >
+            Healthcare Wellness
+          </Typography>
+          <Button color="inherit" onClick={() => navigate("/healthtips")}>
+            Health Tips
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/login")}>
+            Login
+          </Button>
+          <Button color="inherit" onClick={() => navigate("/register")}>
+            Register
+          </Button>
         </Toolbar>
       </AppBar>
 
@@ -74,16 +91,6 @@ export default function Layout() {
           </ListItem>
         </List>
       </Drawer>
-
-      {/* Routes */}
-      <Routes>
-      <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Login />} />
-        <Route path="/patient" element={<PatientDashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/healthcare" element={<Healthcare />} />
-      </Routes>
-    </Router>
+    </>
   );
 }
