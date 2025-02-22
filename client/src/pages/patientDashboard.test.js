@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
-import Dashboard from "../Dashboard"; // Adjust path as needed
 import axios from "axios";
 import { act } from "react-dom/test-utils";
+import PatientDashboard from "./patientDashboard";
 
 jest.mock("axios");
 
@@ -14,21 +14,21 @@ const mockPatientData = {
   },
 };
 
-describe("Dashboard Component", () => {
+describe("PatientDashboard Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     localStorage.setItem("patientId", "test-patient-id");
   });
 
   test("displays loading indicator initially", () => {
-    render(<Dashboard />);
+    render(<PatientDashboard />);
     expect(screen.getByRole("progressbar")).toBeInTheDocument();
   });
 
   test("fetches and displays patient data correctly", async () => {
     axios.get.mockResolvedValueOnce({ data: mockPatientData });
 
-    render(<Dashboard />);
+    render(<PatientDashboard />);
 
     expect(await screen.findByText("Steps")).toBeInTheDocument();
     expect(await screen.findByText("5000")).toBeInTheDocument();
@@ -41,7 +41,7 @@ describe("Dashboard Component", () => {
   test("handles API error gracefully", async () => {
     axios.get.mockRejectedValueOnce(new Error("Failed to fetch"));
 
-    render(<Dashboard />);
+    render(<PatientDashboard />);
 
     await waitFor(() =>
       expect(
@@ -53,7 +53,7 @@ describe("Dashboard Component", () => {
   test("displays upcoming reminders", async () => {
     axios.get.mockResolvedValueOnce({ data: mockPatientData });
 
-    render(<Dashboard />);
+    render(<PatientDashboard />);
 
     await waitFor(() =>
       expect(screen.getByText("Upcoming Reminders")).toBeInTheDocument()
