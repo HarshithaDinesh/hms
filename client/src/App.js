@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import PatientDashboard from "./pages/patientDashboard";
 import Login from "./pages/login";
 import Home from "./pages/Home.jsx";
+import Register from "./pages/Register.jsx";
 import Healthcare from "./pages/healthcare";
 import Profile from "./pages/profile";
 import Layout from "./layout.jsx";
@@ -23,6 +24,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Login />} />
           <Route path="/patient" element={<PatientDashboard />} />
           <Route path="/profile" element={<Profile />} />
