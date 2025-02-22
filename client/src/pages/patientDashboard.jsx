@@ -22,7 +22,9 @@ import axios from "axios";
 // Fetch patient data from API
 const fetchUserData = async (patientId) => {
   try {
-    const response = await axios.get(`http://localhost:3003/api/patient/${patientId}`);
+    const response = await axios.get(
+      `http://localhost:3003/api/patient/${patientId}`
+    );
     return response.data.patient;
   } catch (error) {
     console.error("Error fetching patient data:", error);
@@ -36,7 +38,7 @@ const reminders = [
   { text: "Take Medicine", time: "21:00" },
 ];
 
-const Dashboard = () => {
+const PatientDashboard = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filteredReminders, setFilteredReminders] = useState([]);
@@ -159,4 +161,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default PatientDashboard;
