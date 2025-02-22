@@ -30,7 +30,7 @@ const Login = () => {
         setOpen(true);
         setTimeout(() => {
           setOpen(false);
-          navigate("/patients");
+          navigate("/patient");
         }, 2000);
       }
     } catch (error) {
