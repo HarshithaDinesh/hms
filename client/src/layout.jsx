@@ -9,22 +9,13 @@ import {
   ListItem,
   ListItemText,
   Typography,
+  ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PatientDashboard from "./pages/patientDashboard";
 import Login from "./pages/login";
-
-function Home() {
-  return <h2>Home Page</h2>;
-}
-
-function About() {
-  return <h2>About Page</h2>;
-}
-
-function Contact() {
-  return <h2>Contact Page</h2>;
-}
+import Healthcare from "./pages/healthcare";
+import Profile from "./pages/profile";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
@@ -48,24 +39,48 @@ export default function Layout() {
       {/* Side Navigation */}
       <Drawer anchor="left" open={open} onClose={toggleDrawer}>
         <List>
-          {["Home", "About", "Contact"].map((text) => (
-            <ListItem
-              button
-              key={text}
+          <ListItem disablePadding>
+            <ListItemButton
               component={Link}
-              to={`/${text.toLowerCase()}`}
+              to="/patient"
               onClick={toggleDrawer}
             >
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+              <ListItemText primary="My Dashboard" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/profile"
+              onClick={toggleDrawer}
+            >
+              <ListItemText primary="My Profile" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              component={Link}
+              to="/healthcare"
+              onClick={toggleDrawer}
+            >
+              <ListItemText primary="Healthcare Dashboard" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={Link} to="/login" onClick={toggleDrawer}>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
 
       {/* Routes */}
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Login />} />
         <Route path="/patient" element={<PatientDashboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/healthcare" element={<Healthcare />} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 
 const PatientDashboard = () => {
-  return <div>patientDashboard</div>;
+  return <div>patient Dashboard page</div>;
 };
 
 export default PatientDashboard;
