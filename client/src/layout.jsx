@@ -17,6 +17,7 @@ import Login from "./pages/login";
 import Home from "./pages/Home.jsx";
 import Healthcare from "./pages/healthcare";
 import Profile from "./pages/profile";
+import Registration from "./components/registration";
 
 export default function Layout() {
   const [open, setOpen] = useState(false);
@@ -83,6 +84,7 @@ export default function Layout() {
         <Route path="/patient" element={<PatientDashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/healthcare" element={<Healthcare />} />
+        <Route path="/register" element={<Registration />} />
       </Routes>
     </Router>
   );
