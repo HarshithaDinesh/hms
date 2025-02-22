@@ -1,54 +1,114 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-// or
-// import { FilledInput } from '@mui/material';
+import React, { useState } from "react";
+import axios from "axios";
+import { Container, TextField, Button, Typography, Box } from "@mui/material";
 
 function Registration() {
-    
-   const[email, setEmail] =useState('')
-   const[name, setname] =useState('')
-   const[password, setpassword] =useState('')
-   const[age, setage] =useState('')
-   const[gender, setgender] =useState('')
-   const[height, setheight] =useState('')
-   const[weight, setweight] =useState('')
-   
-    async function register(){
-await axios.post("http://localhost:3003/api/register",{email, name, password, age, gender, height, weight})
-.then((res)=>{
-    console.log(res.data)
-}).catch((err=>{
-    console.log(err)
-}))
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
 
+  async function register() {
+    try {
+      const res = await axios.post("http://localhost:3003/api/register", {
+        email,
+        name,
+        password,
+        age,
+        gender,
+        height,
+        weight,
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.error(err);
     }
+  }
+
   return (
-    <>
-    <h1>Registration</h1>
-    <div>
-        <input value={email} type='text' placeholder='enter email' onChange={(e)=>{setEmail(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='text' value={name} placeholder='enter name' onChange={(e)=>{setname(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='password' value={password} placeholder='enter password' onChange={(e)=>{setpassword(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='text' value={age} placeholder='enter age' onChange={(e)=>{setage(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='text' value ={gender} placeholder='enter gender' onChange={(e)=>{setgender(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='number' value={height} placeholder='enter height' onChange={(e)=>{setheight(e.target.value)}}/>
-    </div>
-    <div>
-        <input type='number'value={weight} placeholder='enter weight' onChange={(e)=>{setweight(e.target.value)}}/>
-    </div>
-    <button onClick={register}>Register</button>
-    </>
-  )
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          mt: 5,
+          p: 3,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          bgcolor: "white",
+          boxShadow: 3,
+          borderRadius: 2,
+        }}
+      >
+        <Typography variant="h5" align="center">
+          Registration
+        </Typography>
+        <TextField
+          label="Email"
+          variant="outlined"
+          fullWidth
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <TextField
+          label="Name"
+          variant="outlined"
+          fullWidth
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          variant="outlined"
+          fullWidth
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <TextField
+          label="Age"
+          type="number"
+          variant="outlined"
+          fullWidth
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <TextField
+          label="Gender"
+          variant="outlined"
+          fullWidth
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+        />
+        <TextField
+          label="Height (cm)"
+          type="number"
+          variant="outlined"
+          fullWidth
+          value={height}
+          onChange={(e) => setHeight(e.target.value)}
+        />
+        <TextField
+          label="Weight (kg)"
+          type="number"
+          variant="outlined"
+          fullWidth
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={register}
+          fullWidth
+        >
+          Register
+        </Button>
+      </Box>
+    </Container>
+  );
 }
 
-export default Registration
+export default Registration;
