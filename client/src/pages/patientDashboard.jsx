@@ -17,17 +17,20 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import HotelIcon from "@mui/icons-material/Hotel";
+import axios from "axios";
 
-// Simulated API call
-const fetchUserData = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ steps: 6000, activeTime: "1.5 hours", sleep: "7 hours" });
-    }, 1500); // Simulate delay
-  });
+// /profile API call to get sleep, steps, and activeTime
+const fetchUserData = async () => {
+  try {
+    const response = await axios.get("/profile");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
 };
 
-// List of reminders (24-hour format)
+// List of reminders
 const reminders = [
   { text: "Drink Water", time: "10:00" },
   { text: "Workout", time: "18:00" },
@@ -38,25 +41,32 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filteredReminders, setFilteredReminders] = useState([]);
+  const [error, setError] = useState(false);
 
   // Fetch user data from backend
   useEffect(() => {
-    fetchUserData().then((data) => {
-      setUserData(data);
+    const getData = async () => {
+      const data = await fetchUserData();
+      if (data) {
+        setUserData(data);
+      } else {
+        setError(true);
+      }
       setLoading(false);
-    });
+    };
+    getData();
   }, []);
 
   // Filter reminders dynamically based on time
   useEffect(() => {
     const updateReminders = () => {
       const now = new Date();
-      const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert to minutes
+      const currentTime = now.getHours() * 60 + now.getMinutes();
 
       // Filter upcoming reminders
       const upcoming = reminders.filter(({ time }) => {
         const [hours, minutes] = time.split(":").map(Number);
-        return hours * 60 + minutes > currentTime; // Only future reminders
+        return hours * 60 + minutes > currentTime;
       });
 
       setFilteredReminders(upcoming);
@@ -79,6 +89,10 @@ const Dashboard = () => {
 
       {loading ? (
         <CircularProgress />
+      ) : error ? (
+        <Typography color="error">
+          Failed to load data. Please try again.
+        </Typography>
       ) : (
         <Grid container spacing={2}>
           {/* Steps Card */}
@@ -87,7 +101,9 @@ const Dashboard = () => {
               <CardContent sx={{ textAlign: "center" }}>
                 <DirectionsWalkIcon fontSize="large" color="primary" />
                 <Typography variant="h6">Steps</Typography>
-                <Typography variant="body1">{userData.steps}</Typography>
+                <Typography variant="body1">
+                  {userData.steps || "N/A"}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -98,7 +114,9 @@ const Dashboard = () => {
               <CardContent sx={{ textAlign: "center" }}>
                 <AccessTimeIcon fontSize="large" color="secondary" />
                 <Typography variant="h6">Active Time</Typography>
-                <Typography variant="body1">{userData.activeTime}</Typography>
+                <Typography variant="body1">
+                  {userData.activeTime || "N/A"}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -109,7 +127,9 @@ const Dashboard = () => {
               <CardContent sx={{ textAlign: "center" }}>
                 <HotelIcon fontSize="large" color="success" />
                 <Typography variant="h6">Sleep</Typography>
-                <Typography variant="body1">{userData.sleep}</Typography>
+                <Typography variant="body1">
+                  {userData.sleep || "N/A"}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
