@@ -19,6 +19,9 @@ app.use(cors()); // Enable CORS for API access
 const userRoutes = require("./routes/user.routes");
 app.use("/api/users", userRoutes);
 
+const patientRoutes = require("./routes/patient.routes");
+app.use("/api/patient", patientRoutes);
+
 // Server listening
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
