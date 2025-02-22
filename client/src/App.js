@@ -7,6 +7,7 @@ import Home from "./pages/Home.jsx";
 import Healthcare from "./pages/healthcare";
 import Profile from "./pages/profile";
 import Layout from "./layout.jsx";
+import HealthTips from "./pages/healthtips.jsx";
 
 const theme = createTheme({
   typography: {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/patient" element={<PatientDashboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/healthcare" element={<Healthcare />} />
+          <Route path="/healthtips" element={<HealthTips />} />
         </Routes>
       </Router>
     </ThemeProvider>
