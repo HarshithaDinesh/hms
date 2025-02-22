@@ -47,7 +47,7 @@ const PatientDashboard = () => {
   useEffect(() => {
     const getData = async () => {
       const patientId =
-        localStorage.getItem("patientId") || "67b9b1ad70a6442cb0fc813a"; // Replace with dynamic ID
+        localStorage.getItem("patientId") || "67b9ad3c60c57631cfb24bd3"; // Replace with dynamic ID
       const data = await fetchUserData(patientId);
       if (data) {
         setUserData({
