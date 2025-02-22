@@ -1,15 +1,24 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const cors = require("cors");
-require("dotenv").config();
 const connectDB = require("./config/db");
 
-const app = express();
+// Load environment variables
+dotenv.config();
+
+// Connect to MongoDB
 connectDB();
-app.use(cors());
-app.use(express.json());
 
-app.get("/", (req, res) => res.send("API is running..."));
+const app = express();
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
-});
+// Middleware
+app.use(express.json()); // Parse JSON request bodies
+app.use(cors()); // Enable CORS for API access
+
+// Import Routes
+const userRoutes = require("./routes/user.routes");
+app.use("/api/users", userRoutes);
+
+// Server listening
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
