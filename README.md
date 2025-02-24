@@ -10,8 +10,8 @@ Note: There are no code changes post Saturday. Readme file has been updated on M
 
 **Task Distribution**
 
-- Harshitha D: Setup repository, mongoDB, write schemas for all the tables, modify login and register API. Frontend: Login functionality, store token in the cookies and redirect to patient page after login.
-- Vishnu: Patient Page(end-to-end), frontend and backend, and home page modification, heath tips page
+- Harshitha D: Setup repository, setup mongoDB, write schemas for all the tables, modify login and register API. Frontend: Login functionality, store token in the cookies and redirect to patient page after login.
+- Vishnu: Patient Page(end-to-end complete implementation), and home page modification, heath tips page
 - Parvaiz: Login and register API (half), Login and register pages (UI)
 - Sugith: Provider Page UI
 
